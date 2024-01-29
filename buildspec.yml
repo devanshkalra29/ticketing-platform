@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto17 # Adjust this if you're using a different JDK version
+      java: corretto11 # Adjust this if you're using a different JDK version
     commands:
       - echo Installing Gradle
       - wget https://services.gradle.org/distributions/gradle-6.8-bin.zip # Replace with the version of Gradle you are using
