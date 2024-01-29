@@ -5,13 +5,6 @@ phases:
     runtime-versions:
       java: corretto17 # Adjust this if you're using a different JDK version
     commands:
-      -echo Installing Amazon Corretto 17
-      - wget https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.tar.gz
-      - tar -xzf amazon-corretto-17-x64-linux-jdk.tar.gz
-      - sudo mv amazon-corretto-17* /usr/lib/jvm/java-17-amazon-corretto
-      - export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
-      - export PATH=$JAVA_HOME/bin:$PATH
-      - java -version
       - echo Installing Gradle
       - wget https://services.gradle.org/distributions/gradle-7.6.3-bin.zip # Replace with the version of Gradle you are using
       - unzip -q gradle-7.6.3-bin.zip
