@@ -7,8 +7,8 @@ phases:
     commands:
       - echo Installing Gradle
       - wget https://services.gradle.org/distributions/gradle-6.8-bin.zip # Replace with the version of Gradle you are using
-      - unzip -q gradle-7.6.3-bin.zip
-      - export GRADLE_HOME=$PWD/gradle-7.6.3
+      - unzip -q gradle-8.5-bin.zip
+      - export GRADLE_HOME=$PWD/gradle-8.5
       - export PATH=$GRADLE_HOME/bin:$PATH
       - gradle -v # Print Gradle version for verification
   pre_build:
