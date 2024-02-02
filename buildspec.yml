@@ -24,8 +24,3 @@ phases:
 artifacts:
   files:
     - build/libs/*.jar # Adjust this path according to your project's output artifacts
-
-# Optional environment variables
-# environment:
-#   variables:
-#     EXAMPLE_VARIABLE: "example_value"
