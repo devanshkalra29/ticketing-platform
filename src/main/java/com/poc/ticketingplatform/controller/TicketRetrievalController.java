@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TicketRetrievalController {
 
-    @GetMapping("/getTicket")
+    @GetMapping("/getTickets")
     public String getTicket() {
         return "Hello world";
     }

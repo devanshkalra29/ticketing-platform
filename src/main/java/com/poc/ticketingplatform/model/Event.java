@@ -1,12 +1,19 @@
 package com.poc.ticketingplatform.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+@Entity
 public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String name;
     private String description;
     private LocalDateTime dateTime;
+    @ManyToOne
+    @JoinColumn(name="venue_id")
     private Venue venue;
 
     public Event(long id, String name, String description, LocalDateTime dateTime, Venue venue) {
