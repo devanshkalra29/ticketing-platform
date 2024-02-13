@@ -4,32 +4,29 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @Entity
+@Table(name = "events")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long id;
+    private Long eventId;
+    @Column(name = "event_name")
     private String name;
     private String description;
+
+    @Column(name = "event_date")
     private LocalDateTime dateTime;
     @ManyToOne
     @JoinColumn(name="venue_id")
     private Venue venue;
 
-    public Event(long id, String name, String description, LocalDateTime dateTime, Venue venue) {
-        this.id = id;
+    public Event() {
+        //default constructor for JPA
+    }
+    public Event(String name, String description, LocalDateTime dateTime, Venue venue) {
         this.name = name;
         this.description = description;
         this.dateTime = dateTime;
         this.venue = venue;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -67,7 +64,7 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "id=" + id +
+                "id=" + eventId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", dateTime=" + dateTime +

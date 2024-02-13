@@ -1,16 +1,23 @@
 package com.poc.ticketingplatform.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.List;
 @Entity
+@Table(name = "cities")
 public class City {
     @Id
     private long cityId;
+    @Column(name = "city_name")
     String name;
     String state;
 
+    public City() {
+        //default constructor for JPA
+    }
     public City(String name, String state) {
         this.name = name;
         this.state = state;

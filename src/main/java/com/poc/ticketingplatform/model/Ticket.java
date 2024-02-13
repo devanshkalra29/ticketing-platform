@@ -3,26 +3,33 @@ package com.poc.ticketingplatform.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tickets")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ticketId;
-    @ManyToOne
-    @JoinColumn(name = "event_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event_id", referencedColumnName = "eventId")
     private Event event;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     private double price;
     private String status;
-    private String seatInfo;
 
-    public Ticket(Event event, User user, double price, String status, String seatInfo) {
+    @Column(name = "seat_number")
+    private String seatNumber;
+
+    public Ticket(){
+
+    }
+
+    public Ticket(Event event, User user, double price, String status, String seatNumber) {
         this.event = event;
         this.user = user;
         this.price = price;
         this.status = status;
-        this.seatInfo = seatInfo;
+        this.seatNumber = seatNumber;
     }
 
     public long getId() {
@@ -66,11 +73,11 @@ public class Ticket {
         this.status = status;
     }
 
-    public String getSeatInfo() {
-        return seatInfo;
+    public String getSeatNumber() {
+        return seatNumber;
     }
 
-    public void setSeatInfo(String seatInfo) {
-        this.seatInfo = seatInfo;
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
     }
 }

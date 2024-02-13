@@ -2,16 +2,21 @@ package com.poc.ticketingplatform.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
-    private String userId;
+    private long userId;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
 
+    public User() {
+        // JPA requires a no-arg constructor
+    }
     public User(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
