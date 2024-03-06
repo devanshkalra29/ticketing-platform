@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:15-alpine'           #FOR APPLE SILICON - arm64v8/postgres:15-alpine - SHOULD WORK
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ticket-platform
+      POSTGRES_PASSWORD: ticket-platform
+      PGDATA: /data/postgres
+      POSTGRES_DB: ticket-platform
+    volumes:
+      - db:/data/postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+volumes:
+  db:

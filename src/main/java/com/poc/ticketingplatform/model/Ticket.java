@@ -80,4 +80,16 @@ public class Ticket {
     public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketId=" + ticketId +
+                ", event=" + event +
+                ", user=" + user +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                ", seatNumber='" + seatNumber + '\'' +
+                '}';
+    }
 }
