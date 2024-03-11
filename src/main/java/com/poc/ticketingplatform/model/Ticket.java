@@ -2,19 +2,27 @@ package com.poc.ticketingplatform.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+import java.util.UUID;
+
 @Entity
 @Table(name = "tickets")
 public class Ticket {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ticketId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(updatable = false)
+    private UUID ticketId;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_id", referencedColumnName = "eventId")
     private Event event;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     private double price;
+
     private String status;
 
     @Column(name = "seat_number")
@@ -32,11 +40,11 @@ public class Ticket {
         this.seatNumber = seatNumber;
     }
 
-    public long getId() {
+    public UUID getId() {
         return ticketId;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.ticketId = id;
     }
 
@@ -91,5 +99,18 @@ public class Ticket {
                 ", status='" + status + '\'' +
                 ", seatNumber='" + seatNumber + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return ticketId == ticket.ticketId && Double.compare(price, ticket.price) == 0 && Objects.equals(event, ticket.event) && Objects.equals(user, ticket.user) && Objects.equals(status, ticket.status) && Objects.equals(seatNumber, ticket.seatNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ticketId, event, user, price, status, seatNumber);
     }
 }

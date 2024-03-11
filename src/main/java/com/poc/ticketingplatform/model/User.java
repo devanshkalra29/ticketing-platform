@@ -1,14 +1,17 @@
 package com.poc.ticketingplatform.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    private long userId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(updatable = false)
+    private UUID userId;
     private String firstName;
     private String lastName;
     private String email;
@@ -22,6 +25,14 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -64,5 +75,18 @@ public class User {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, firstName, lastName, email, phoneNumber);
     }
 }
