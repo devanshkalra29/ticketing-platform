@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("/tickets")
 public class TicketRetrievalController {
 
     @Autowired
     TicketRetreivalService ticketRetreivalService;
 
-    @GetMapping("/allTickets")
+    @GetMapping("/")
     public List<Ticket> getTickets() {
         return ticketRetreivalService.getAllTickets();
     }
+
+
 
 }
