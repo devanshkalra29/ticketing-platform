@@ -2,12 +2,16 @@ package com.poc.ticketingplatform.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+import java.util.UUID;
+
 @Entity
 @Table(name = "venues")
 public class Venue {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long venueId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(updatable = false)
+    private UUID venueId;
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
@@ -26,11 +30,11 @@ public class Venue {
         this.address =address;
     }
 
-    public long getVenueId() {
+    public UUID getVenueId() {
         return venueId;
     }
 
-    public void setVenueId(long venueId) {
+    public void setVenueId(UUID venueId) {
         this.venueId = venueId;
     }
 
@@ -65,5 +69,18 @@ public class Venue {
                 ", city=" + city +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Venue venue = (Venue) o;
+        return venueId == venue.venueId && Objects.equals(city, venue.city) && Objects.equals(name, venue.name) && Objects.equals(address, venue.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(venueId, city, name, address);
     }
 }
