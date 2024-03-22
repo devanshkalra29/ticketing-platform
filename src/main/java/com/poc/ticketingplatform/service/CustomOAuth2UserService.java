@@ -22,12 +22,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        logger.trace("load user {}",userRequest.getAccessToken());
         OAuth2User oAuth2User = super.loadUser(userRequest);
-
+        logger.info(oAuth2User.toString());
         String email = oAuth2User.getAttribute("email");
-        String firstName = oAuth2User.getAttribute("firstName");
-        String lastName = oAuth2User.getAttribute("lastName");
+        String firstName = oAuth2User.getAttribute("given_name");
+        String lastName = oAuth2User.getAttribute("family_name");
 
         logger.info("WE GOT THE USER INFO: " + email);
         User user = userRepository.findByEmail(email);
