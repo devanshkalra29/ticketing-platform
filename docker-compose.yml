@@ -4,7 +4,7 @@ services:
     image: 'postgres:15-alpine'           #FOR APPLE SILICON - arm64v8/postgres:15-alpine - SHOULD WORK
     container_name: postgres
     ports:
-      - 5432:5432
+      - 5432:5432   #To find and kill on port run -- sudo ss -lptn 'sport = :5432'
     environment:
       POSTGRES_USER: ticket-platform
       POSTGRES_PASSWORD: ticket-platform
