@@ -22,24 +22,18 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        logger.info("USER AUTHENTICATION SUCCESSFUL...");
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        logger.info(oAuth2User.toString());
+        saveUser(oAuth2User);
+        return oAuth2User;
+    }
+
+    private void saveUser(OAuth2User oAuth2User) {
         String email = oAuth2User.getAttribute("email");
         String firstName = oAuth2User.getAttribute("given_name");
         String lastName = oAuth2User.getAttribute("family_name");
 
-        logger.info("WE GOT THE USER INFO: " + email);
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            // User doesn't exist, create a new one
-            user = new User();
-            user.setEmail(email);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            // Set other details
-            userRepository.save(user);
-        }
-        return oAuth2User;
-
+        userRepository.findByEmail(email)
+                .orElseGet(()-> userRepository.save(new User(firstName,lastName,email, null)));
     }
 }
