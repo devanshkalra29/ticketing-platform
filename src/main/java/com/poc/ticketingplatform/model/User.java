@@ -1,7 +1,6 @@
 package com.poc.ticketingplatform.model;
 
 import jakarta.persistence.*;
-
 import java.util.Objects;
 import java.util.UUID;
 
@@ -89,4 +88,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(userId, firstName, lastName, email, phoneNumber);
     }
+
 }
